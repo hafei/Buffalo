@@ -8,7 +8,7 @@ namespace Buffalo.Core
 {
     public interface ITypeFinder
     {
-        IList<Assembly> GetAllAssemblies();
+        IList<Assembly> GetAssemblies();
 
         IEnumerable<Type> FindClassesOrType(Type assignFrom, bool onlyConcreteClasses = true);
 

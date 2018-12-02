@@ -87,7 +87,7 @@ namespace Buffalo.Core
             throw new NotImplementedException();
         }
 
-        public IList<Assembly> GetAllAssemblies()
+        public virtual IList<Assembly> GetAssemblies()
         {
             var addedAssemblyNames = new List<string>();
             var assemblies = new List<Assembly>() { Assembly.GetExecutingAssembly() };
@@ -146,7 +146,7 @@ namespace Buffalo.Core
         protected virtual void LoadMatchingAssemblies(string directoryPath)
         {
             var loadedAssemglyName = new List<string>();
-            foreach (var assembly in GetAllAssemblies())
+            foreach (var assembly in GetAssemblies())
             {
                 loadedAssemglyName.Add(assembly.FullName);
             }
