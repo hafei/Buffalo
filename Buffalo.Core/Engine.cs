@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -69,10 +71,15 @@ namespace Buffalo.Core
             return context != null ? context.RequestServices : ServiceProvider;
         }
 
-        //protected virtual IServiceProvider RegisterDependencies()
-        //{
+        protected virtual IServiceProvider RegisterDependencies(IServiceCollection services, ITypeFinder typrFinder)
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterInstance(this).As<IEngine>().SingleInstance();
 
-        //}
+            containerBuilder.Populate(services);
+            _serviceProvider = new AutofacServiceProvider(containerBuilder.Build());
+            return _serviceProvider;
+        }
         #endregion
     }
 }
